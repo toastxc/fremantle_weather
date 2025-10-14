@@ -19,12 +19,12 @@ pub struct Results {
     #[serde(rename = "uv_max_time")]
     pub uv_max_time: String,
     pub ozone: f64,
-    // #[serde(rename = "ozone_time")]
-    // pub ozone_time: String,
-    // #[serde(rename = "safe_exposure_time")]
-    // pub safe_exposure_time: SafeExposureTime,
-    // #[serde(rename = "sun_info")]
-    // pub sun_info: SunInfo,
+    #[serde(rename = "ozone_time")]
+    pub ozone_time: String,
+    #[serde(rename = "safe_exposure_time")]
+    pub safe_exposure_time: SafeExposureTime,
+    #[serde(rename = "sun_info")]
+    pub sun_info: SunInfo,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -82,8 +82,8 @@ lazy_static! {
 
 #[server]
 pub async fn weather_get() -> Result<Root, ServerFnError> {
-    let header = TOKEN.to_string();
-
+    let header = TOKEN.replace('\n', "");
+    
     warn!("TOKEN: {:?}", header);
 
     let url = format!("https://api.openuv.io/api/v1/uv?lat=-32.056946&lng=115.743889");
