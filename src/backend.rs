@@ -82,14 +82,16 @@ lazy_static! {
 
 #[server]
 pub async fn weather_get() -> Result<Root, ServerFnError> {
-    warn!("TOKEN: {}", TOKEN.to_string());
+    let header = TOKEN.to_string();
+
+    warn!("TOKEN: {:?}", header);
 
     let url = format!("https://api.openuv.io/api/v1/uv?lat=-32.056946&lng=115.743889");
 
     let client = reqwest::Client::new();
     let response = client
         .get(url)
-        .header("x-access-token", TOKEN.to_string())
+        .header("x-access-token", header)
         .send()
         .await
         .unwrap()
