@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  fullstack:
+    build:
+     dockerfile: Dockerfile
+    volumes:
+      - ./token.txt:/usr/local/app/token.txt
+    ports:
+    - "8088:8080"
