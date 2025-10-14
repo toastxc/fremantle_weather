@@ -64,11 +64,8 @@ fn Echo() -> Element {
                     is_loading.set(true);
                     let uv = weather_get().await.unwrap();
                     weather.set(uv);
-                    warn!("YIPEEE");
                     is_loading.set(false);
                 },
-
-
                 "Refresh"
             }
         }

@@ -1,4 +1,4 @@
-use dioxus::{ prelude::*};
+use dioxus::{logger::tracing::warn, prelude::*};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -82,6 +82,8 @@ lazy_static! {
 
 #[server]
 pub async fn weather_get() -> Result<Root, ServerFnError> {
+    warn!("TOKEN: {}", TOKEN.to_string());
+
     let url = format!("https://api.openuv.io/api/v1/uv?lat=-32.056946&lng=115.743889");
 
     let client = reqwest::Client::new();
